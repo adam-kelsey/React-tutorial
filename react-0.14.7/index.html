@@ -8,16 +8,54 @@
   <body>
     <div id="area"></div>
     <script type="text/babel">
+      
       var HelloWorld = React.createClass({
+
+        propTypes: {
+          name: React.PropTypes.string,
+          isPerson: React.PropTypes.bool
+        },
+
+        getDefaultProps: function() {
+          return {
+            name: 'Adam'
+          }
+        },
+
+        render: function() {
+          var greeting = "World";
+
+          if(this.props.isPerson) {
+            greeting = (<Person name={this.props.name} />)
+          }
+
+          return (
+            <h1>Hello {greeting}</h1>
+          )
+        }
+      });
+
+      var Person = React.createClass({
+
+        propTypes: {
+          name: React.PropTypes.string.isRequired
+        },
+
+        getDefaultProps: function() {
+          return {
+            name: 'Adam'
+          }
+        },
+
         render: function() {
           return (
-            <h1>Hello {this.props.name}</h1>
+            <span>{this.props.name}</span>
           )
         }
       });
 
       ReactDOM.render(
-        <HelloWorld name="Adam" />,
+        <HelloWorld name="Tim" isPerson={false} />,
         document.getElementById('area')
       );
     </script>
